@@ -68,7 +68,8 @@ project/
 
 1. Install dependencies:
    ```bash
-   pip install flask google-generativeai
+   pip install flask google-generativeai python-dotenv gunicorn waitress requests pillow flask-cors
+
 2. Set your environment variable:
    ```bash
    export API_KEY="your_api_key_here"
@@ -83,6 +84,6 @@ project/
 - Select a house image
 - Click Predict
 - View:
-    Rating
-    Category
-    Explanation
+  • Rating
+  • Category
+  • Explanation
