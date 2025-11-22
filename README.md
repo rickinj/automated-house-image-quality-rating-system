@@ -84,6 +84,6 @@ project/
 - Select a house image
 - Click Predict
 - View:
-  • Rating
-  • Category
-  • Explanation
+  - Rating
+  - Category
+  - Explanation
