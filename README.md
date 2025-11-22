@@ -34,7 +34,7 @@ project/
 ├── templates/
 │ └── index.html # Main webpage with upload and output UI
 │
-├── .env/ # Environment variable
+├── .env/ # Environment variable (api_key.txt to be renamed as .env file)
 │
 ├── train_images/ # Pre-labelled reference images
 └── test_images/ # Temporary folder for uploaded images
