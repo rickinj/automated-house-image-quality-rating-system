@@ -70,7 +70,7 @@ project/
    ```bash
    pip install flask google-generativeai python-dotenv gunicorn waitress requests pillow flask-cors
 
-2. Set your environment variable:
+2. Set your environment variable (export for Linux or set for Windows):
    ```bash
    export API_KEY="your_api_key_here"
    
