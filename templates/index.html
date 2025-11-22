@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>House Rating Predictor</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🏠 House Rating Predictor</h1>
+    <div class="upload-box">
+      <input type="file" id="fileInput" accept="image/*" hidden />
+      <button id="uploadBtn">Upload Image</button>
+      <img id="preview" src="" alt="Preview" />
+    </div>
+
+    <button id="predictBtn" disabled>Predict</button>
+
+    <div class="result-box" id="resultBox" style="display:none;">
+      <h2>Prediction Result</h2>
+      <p><strong>Rating:</strong> <span id="rating"></span></p>
+      <p><strong>Category:</strong> <span id="category"></span></p>
+      <p><strong>Reason:</strong> <span id="reason"></span></p>
+    </div>
+  </div>
+
+<script>
+  const uploadBtn = document.getElementById("uploadBtn");
+  const fileInput = document.getElementById("fileInput");
+  const preview = document.getElementById("preview");
+  const predictBtn = document.getElementById("predictBtn");
+  const resultBox = document.getElementById("resultBox");
+
+  uploadBtn.addEventListener("click", (e) => {
+    e.preventDefault(); // prevent accidental form reload
+    fileInput.click();
+  });
+
+  fileInput.addEventListener("change", () => {
+    const file = fileInput.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        preview.src = e.target.result;
+        preview.style.display = "block";
+      };
+      reader.readAsDataURL(file);
+      predictBtn.disabled = false;
+    }
+  });
+
+  predictBtn.addEventListener("click", async (e) => {
+    e.preventDefault(); // 👈 stop page reload
+    const file = fileInput.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    predictBtn.textContent = "Predicting...";
+    predictBtn.disabled = true;
+
+    try {
+      const res = await fetch("/predict", { method: "POST", body: formData });
+      const data = await res.json();
+
+      document.getElementById("rating").textContent = data.rating || "N/A";
+      document.getElementById("category").textContent = data.category || "N/A";
+      document.getElementById("reason").textContent = data.reason || "N/A";
+
+      resultBox.style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+    } catch (err) {
+      alert("Error during prediction. Please try again.");
+      console.error(err);
+    }
+
+    predictBtn.textContent = "Predict Again";
+    predictBtn.disabled = false;
+  });
+</script>
+
+</body>
+</html>
