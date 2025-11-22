@@ -36,7 +36,7 @@ project/
 │
 ├── train_images/ # Pre-labelled reference images
 └── test_images/ # Temporary folder for uploaded images
-
+└── .env/ # Environment variable
 ```
 ---
 
