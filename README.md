@@ -33,10 +33,9 @@ project/
 │
 ├── templates/
 │ └── index.html # Main webpage with upload and output UI
-│
+├── .env/ # Environment variable
 ├── train_images/ # Pre-labelled reference images
 └── test_images/ # Temporary folder for uploaded images
-├──  .env/ # Environment variable
 
 ```
 ---
